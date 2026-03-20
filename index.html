@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Kirim THR - Bro Arif</title>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Konfigurasi Tailwind untuk Font Custom -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- SweetAlert2 untuk Notifikasi -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Canvas Confetti untuk Efek Partikel -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* Custom Scrollbar bergaya gelap untuk iframe jika memungkinkan */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+        
+        /* Utility class untuk hide/show modal dengan animasi */
+        .modal-active { opacity: 1; pointer-events: auto; }
+        .modal-inactive { opacity: 0; pointer-events: none; }
+        .scale-in { transform: scale(1); }
+        .scale-out { transform: scale(0.95); }
+    </style>
+</head>
+<body class="bg-[#09090b] text-zinc-100 min-h-screen font-sans flex flex-col items-center justify-center p-4 selection:bg-emerald-500 selection:text-white">
+
+    <!-- Konten Halaman Utama (Background) -->
+    <div class="text-center z-10 max-w-2xl">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-500 mb-6">
+            Selamat Datang di Website Saya
+        </h1>
+        <p class="text-zinc-400 mb-10 leading-relaxed">
+            Ini adalah contoh halaman utama. Anda dapat memanggil modal kotak amal dari tombol di bawah ini.
+        </p>
+        
+        <!-- Tombol Pemicu Modal -->
+        <button onclick="openModal()" class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-lg bg-zinc-100 px-8 font-medium text-zinc-950 transition-all duration-300 hover:bg-white hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2 focus:ring-offset-zinc-900">
+            <span class="mr-2">🎁</span>
+            <span class="font-bold">Buka Kotak Amal THR</span>
+        </button>
+    </div>
+
+    <!-- Background Glow Effect Halaman Utama -->
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none z-0"></div>
+
+    <!-- ========================================== -->
+    <!-- KOMPONEN MODAL TRAKTEER MULAI DARI SINI    -->
+    <!-- ========================================== -->
+    <div id="thrModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 transition-opacity duration-300 modal-inactive">
+        
+        <!-- Backdrop Blur -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeModal()"></div>
+
+        <!-- Modal Box -->
+        <div id="modalBox" class="bg-[#0c0c0e] border border-zinc-800/80 rounded-2xl w-full max-w-4xl shadow-2xl relative overflow-hidden flex flex-col transform transition-transform duration-300 scale-out h-[90vh] md:h-[80vh]">
+            
+            <!-- Glow Effect di dalam Modal -->
+            <div class="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-500/10 blur-[80px] pointer-events-none z-0"></div>
+
+            <!-- Header Modal -->
+            <div class="px-5 py-4 border-b border-zinc-800/80 flex justify-between items-center relative z-20 bg-zinc-900/50 backdrop-blur-md">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
+                        <span class="text-lg">💸</span>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-zinc-100 tracking-tight flex items-center gap-2">
+                            Kotak Amal THR
+                        </h2>
+                        <div class="text-[11px] text-zinc-400 font-mono mt-0.5 flex items-center gap-1.5">
+                            <span class="relative flex h-1.5 w-1.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                            </span>
+                            Secure Connection to Trakteer
+                        </div>
+                    </div>
+                </div>
+                <!-- Tombol Close (X) -->
+                <button onclick="closeModal()" class="text-zinc-500 hover:text-white hover:bg-zinc-800 p-2.5 rounded-xl transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body Modal (Iframe) -->
+            <div class="relative flex-1 w-full bg-zinc-950 overflow-hidden">
+                <!-- Loading State (Tampil sebelum iframe load) -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-zinc-600 font-mono text-sm z-0">
+                    <svg class="animate-spin h-6 w-6 text-emerald-500 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    > Menyambungkan ke Trakteer...
+                </div>
+                
+                <!-- URL Iframe yang diminta -->
+                <iframe 
+                    src="https://trakteer.id/itsmebroarif/tip?open=true" 
+                    class="absolute inset-0 w-full h-full z-10 border-0 bg-transparent"
+                    title="Trakteer Bro Arif">
+                </iframe>
+            </div>
+
+            <!-- Footer Modal (Tombol Konfirmasi) -->
+            <div class="p-4 md:p-5 border-t border-zinc-800/80 bg-[#0c0c0e] relative z-20 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-zinc-500 font-mono hidden md:block">
+                    Every tip counts. Terima kasih!
+                </p>
+                
+                <button onclick="handleConfirmation()" class="group relative inline-flex h-11 w-full md:w-auto items-center justify-center overflow-hidden rounded-lg bg-emerald-500 px-8 font-medium text-zinc-950 transition-all duration-300 hover:bg-emerald-400 hover:scale-[1.02] hover:shadow-[0_0_15px_rgba(16,185,129,0.4)] focus:outline-none">
+                    <span class="mr-2 text-base">🚀</span> 
+                    <span class="font-bold tracking-wide text-sm">SAYA SUDAH KIRIM THR</span>
+                    <!-- Efek kilap (shine) -->
+                    <div class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+                       <div class="relative h-full w-8 bg-white/20"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================== -->
+    <!-- AKHIR KOMPONEN MODAL TRAKTEER              -->
+    <!-- ========================================== -->
+
+    <!-- SCRIPT LOGIKA MODAL & ANIMASI -->
+    <script>
+        const modal = document.getElementById('thrModal');
+        const modalBox = document.getElementById('modalBox');
+
+        // Fungsi Membuka Modal
+        function openModal() {
+            modal.classList.remove('modal-inactive');
+            modal.classList.add('modal-active');
+            
+            setTimeout(() => {
+                modalBox.classList.remove('scale-out');
+                modalBox.classList.add('scale-in');
+            }, 10); // Sedikit delay agar transisi CSS berjalan mulus
+        }
+
+        // Fungsi Menutup Modal
+        function closeModal() {
+            modalBox.classList.remove('scale-in');
+            modalBox.classList.add('scale-out');
+            
+            setTimeout(() => {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-inactive');
+            }, 300); // Sesuaikan dengan durasi transisi Tailwind (duration-300)
+        }
+
+        // Fungsi Konfirmasi THR
+        function handleConfirmation() {
+            // Tutup modal terlebih dahulu agar fokus ke notifikasi sukses
+            closeModal();
+
+            // 1. Jalankan efek Canvas Confetti
+            setTimeout(() => {
+                triggerConfetti();
+            }, 200);
+
+            // 2. Tampilkan notifikasi SweetAlert
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'System Confirmed 🎉',
+                    html: '<span class="text-zinc-400 text-sm">Terima kasih banyak atas dukungannya!<br>Semoga rezekinya semakin lancar dan berkah.</span>',
+                    icon: 'success',
+                    background: '#09090b', // Warna latar dark (zinc-950)
+                    color: '#f4f4f5',      // Warna teks terang (zinc-50)
+                    confirmButtonColor: '#10b981', // Warna tombol Emerald
+                    confirmButtonText: '<span class="font-mono font-bold">ACKNOWLEDGE</span>',
+                    iconColor: '#10b981',
+                    customClass: {
+                        popup: 'border border-zinc-800 rounded-2xl shadow-2xl',
+                        title: 'text-2xl font-bold font-sans tracking-tight',
+                        confirmButton: 'rounded-lg px-6 py-2 transition-all hover:scale-105'
+                    },
+                    backdrop: `
+                        rgba(0, 0, 0, 0.7)
+                        backdrop-filter: blur(5px);
+                    `
+                });
+            }, 500); 
+        }
+
+        // Konfigurasi Canvas Confetti
+        function triggerConfetti() {
+            var count = 200;
+            var defaults = {
+                origin: { y: 0.6 },
+                zIndex: 9999, // Pastikan di atas segalanya
+                colors: ['#10b981', '#14b8a6', '#34d399', '#ffffff'] // Tema hijau
+            };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
+        }
+    </script>
+</body>
+</html>
