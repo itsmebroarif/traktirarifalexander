@@ -3,230 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bagi THR Lebaran Yuk!</title>
-    
-    <!-- Google Fonts -->
+    <title>Contact & Support | Bro Arif</title>
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        lebaran: {
-                            light: '#f0fdf4',
-                            primary: '#166534',
-                            secondary: '#15803d',
-                            accent: '#f59e0b', // Gold-ish
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bootstrap-4/bootstrap-4.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
-        /* Custom Styles to ensure mobile-first smooth experience */
         body {
-            background-color: #e2e8f0;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Custom Background Gradients */
+        .bg-light-theme {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            background-attachment: fixed;
+        }
+
+        html.dark .bg-dark-theme {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            background-attachment: fixed;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        html.dark .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Input focus styles */
+        .input-glass {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        html.dark .input-glass {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
         }
         
-        .mobile-container {
-            max-width: 480px;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            min-height: 100vh;
-            box-shadow: 0 0 25px rgba(0,0,0,0.1);
-            position: relative;
-            overflow-x: hidden;
+        .input-glass:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
         }
 
-        /* Styling the Trakteer inline button wrapper */
-        .trakteer-wrapper iframe {
-            margin: 0 auto !important;
-            display: block !important;
+        /* Trakteer Button Animation */
+        .btn-trakteer {
+            background: #be1e2d;
+            box-shadow: 0 4px 15px rgba(190, 30, 45, 0.3);
         }
-
-        /* Floating decoration */
-        .ketupat-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+        .btn-trakteer:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(190, 30, 45, 0.4);
         }
     </style>
 </head>
-<body class="antialiased text-slate-800">
+<body class="bg-light-theme dark:bg-dark-theme text-slate-800 dark:text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-    <main class="mobile-container pb-20">
-        <!-- Header Section -->
-        <header class="relative pt-12 pb-8 px-6 text-center bg-lebaran-primary rounded-b-[40px] text-white shadow-lg overflow-hidden">
-            <!-- Decorative circles -->
-            <div class="absolute -top-10 -left-10 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>
-            <div class="absolute top-10 -right-10 w-24 h-24 bg-lebaran-accent opacity-20 rounded-full blur-xl"></div>
-            
-            <div class="relative z-10" id="hero-content">
-                <span class="text-4xl mb-3 block ketupat-float">🕌✨</span>
-                <h1 class="font-display font-bold text-2xl mb-1 tracking-wide">Selamat Hari Raya</h1>
-                <h2 class="font-display font-semibold text-lg text-lebaran-accent mb-4">Idul Fitri 1447 H</h2>
-                
-                <div class="avatar-container mx-auto w-24 h-24 rounded-full border-4 border-lebaran-accent overflow-hidden shadow-xl mb-4 relative bg-white flex items-center justify-center">
-                    <!-- Placeholder Avatar (Ganti dengan foto kamu nanti jika mau, cukup ubah src) -->
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Arif&backgroundColor=e2e8f0" alt="Avatar" class="w-full h-full object-cover">
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center text-xl shadow-lg hover:scale-110 transition-transform text-indigo-600 dark:text-yellow-400">
+        <i class="fa-solid fa-moon dark:hidden"></i>
+        <i class="fa-solid fa-sun hidden dark:block"></i>
+    </button>
+
+    <main class="max-w-md mx-auto min-h-screen p-6 flex flex-col pt-12 pb-12">
+        
+        <div class="gsap-item text-center mb-8">
+            <div class="relative inline-block mb-4">
+                <div class="w-28 h-28 mx-auto rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 p-1 shadow-xl">
+                    <img src="https://ui-avatars.com/api/?name=Bro+Arif&background=1e293b&color=fff&size=128" alt="Profile" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800">
                 </div>
-                
-                <p class="font-medium text-sm text-lebaran-light opacity-90">
-                    Minal Aidin wal Faizin.<br>Mohon Maaf Lahir dan Batin 🙏
-                </p>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <section class="px-6 pt-8 pb-4">
-            
-            <!-- Greeting Card -->
-            <div data-aos="fade-up" data-aos-duration="800" class="bg-white rounded-3xl p-6 shadow-sm border border-emerald-100 mb-6 relative">
-                <div class="absolute -top-4 -right-2 text-3xl transform rotate-12">💌</div>
-                <h3 class="font-display font-bold text-lebaran-primary text-xl mb-2">Halo Orang Baik!</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    Ketupat udah dipotong, opor ayam udah mateng. Kalau dompet kalian juga udah mateng (baca: cair), boleh dong bagi-bagi THR online-nya ke sini hehehe... 🫣💸
-                </p>
-                <p class="text-sm text-slate-600 leading-relaxed mt-2">
-                    Berapapun THR yang dikasih, bakal sangat berarti buat nambahin beli kue nastar dan sirup marjan. Terima kasih ya!
-                </p>
-            </div>
-
-            <!-- Trakteer Donation Card -->
-            <div data-aos="fade-up" data-aos-delay="150" data-aos-duration="800" class="bg-white rounded-3xl p-6 shadow-sm border border-emerald-100 mb-6 text-center">
-                <h3 class="font-display font-bold text-slate-800 text-lg mb-1">Kirim THR Lewat Trakteer</h3>
-                <p class="text-xs text-slate-500 mb-5">Pilih nominal sesukamu, bayar pakai e-wallet favoritmu.</p>
-                
-                <!-- Trakteer Inject Area -->
-                <div class="trakteer-wrapper flex justify-center transform hover:scale-105 transition duration-300">
-                    <!-- SKRIP TRAKTEER DARI USER -->
-                    <script type='text/javascript' src='https://edge-cdn.trakteer.id/js/trbtn-overlay.min.js?v=14-05-2025'></script>
-                    <script type='text/javascript' class='troverlay'>
-                        (function() {
-                            var trbtnId = trbtnOverlay.init('Dukung Saya di Trakteer','#be1e2d','https://trakteer.id/v1/itsmebroarif/tip/embed/modal','https://edge-cdn.trakteer.id/images/embed/trbtn-icon.png?v=14-05-2025','40','inline');
-                            trbtnOverlay.draw(trbtnId);
-                        })();
-                    </script>
+                <div class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 border-4 border-white dark:border-slate-800 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-white text-xs"></i>
                 </div>
             </div>
+            <h1 class="text-2xl font-extrabold tracking-tight mb-1">Bro Arif</h1>
+            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Digital Creator & Developer</p>
+        </div>
 
-            <!-- Interactive Buttons -->
-            <div data-aos="fade-up" data-aos-delay="300" class="grid grid-cols-2 gap-3">
-                <button id="btn-doa" class="bg-lebaran-primary hover:bg-lebaran-secondary text-white font-semibold py-3 px-4 rounded-2xl text-sm transition-all shadow-md active:scale-95 flex flex-col items-center justify-center gap-1">
-                    <span class="text-xl">🤲</span>
-                    <span>Kirim Doa</span>
-                </button>
-                <button id="btn-skip" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 font-semibold py-3 px-4 rounded-2xl text-sm transition-all shadow-sm active:scale-95 flex flex-col items-center justify-center gap-1">
-                    <span class="text-xl">😅</span>
-                    <span>Skip Dulu</span>
-                </button>
-            </div>
+        <div class="gsap-item mb-10 w-full" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://trakteer.id/itsmebroarif" target="_blank" class="btn-trakteer w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl text-white font-bold transition-all duration-300">
+                <img src="https://trakteer.id/images/mix/logo-trakteer-icon.png" alt="Trakteer" class="w-6 h-6">
+                Dukung Saya di Trakteer
+            </a>
+        </div>
+
+        <div class="gsap-item glass-card rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/20 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
             
-        </section>
+            <div class="mb-6 text-center">
+                <h2 class="text-xl font-bold mb-2 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i> Chat via WhatsApp
+                </h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Isi form di bawah untuk mengirim pesan langsung ke WhatsApp saya.</p>
+            </div>
 
-        <!-- Footer -->
-        <footer class="text-center mt-6 text-xs text-slate-400 pb-8">
-            <p>&copy; 2026 THR Online. Dibuat dengan 🙏.</p>
+            <form id="waForm" class="space-y-4 relative z-10">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Nama Lengkap</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-regular fa-user"></i>
+                        </div>
+                        <input type="text" id="waName" required placeholder="Cth: Budi Santoso" class="input-glass w-full pl-11 pr-4 py-3 rounded-xl text-sm transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Username Instagram</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <input type="text" id="waIg" required placeholder="Cth: @budi_s" class="input-glass w-full pl-11 pr-4 py-3 rounded-xl text-sm transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Pesan / Keperluan</label>
+                    <textarea id="waMessage" required rows="4" placeholder="Tuliskan keperluanmu secara detail di sini..." class="input-glass w-full p-4 rounded-xl text-sm transition-all resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full mt-2 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-[0_8px_20px_rgba(99,102,241,0.3)] hover:shadow-[0_10px_25px_rgba(99,102,241,0.5)] transition-all duration-300 flex justify-center items-center gap-2 transform active:scale-95">
+                    Kirim Pesan Sekarang <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+        <footer class="mt-auto pt-10 text-center text-xs font-medium text-slate-400 dark:text-slate-500 pb-4">
+            <p>&copy; 2026 Bro Arif. All rights reserved.</p>
         </footer>
     </main>
 
-    <!-- GSAP (Animations) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
-    <!-- AOS JS (Scroll Animations) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
-        document.addEventListener("DOMContentLoaded", (event) => {
-            // 1. Initialize AOS
-            AOS.init({
-                once: true, // whether animation should happen only once - while scrolling down
-                offset: 50,
-            });
+        // 1. Dark Mode Toggler Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        
+        // Cek preferensi sebelumnya (jika ada)
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
 
-            // 2. GSAP Initial Load Animations
-            const tl = gsap.timeline();
-            
-            // Fade in and slide down the hero text
-            tl.from("#hero-content h1, #hero-content h2", {
-                y: -20,
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            if (htmlElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // 2. Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+
+        // 3. Initial Animation with GSAP
+        window.addEventListener('load', () => {
+            gsap.from(".gsap-item", {
+                y: 50,
                 opacity: 0,
-                duration: 0.8,
+                duration: 1,
                 stagger: 0.2,
-                ease: "back.out(1.7)"
+                ease: "power3.out"
             });
+        });
 
-            // Pop in the avatar
-            tl.from(".avatar-container", {
-                scale: 0,
-                rotation: -180,
-                opacity: 0,
-                duration: 0.8,
-                ease: "elastic.out(1, 0.5)"
-            }, "-=0.4");
+        // 4. WhatsApp Form Logic & SweetAlert2
+        document.getElementById('waForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-            // 3. SweetAlert2 Interactive Buttons
+            const name = document.getElementById('waName').value.trim();
+            let ig = document.getElementById('waIg').value.trim();
+            const message = document.getElementById('waMessage').value.trim();
+
+            // Format IG handle agar seragam (menambahkan @ jika user lupa)
+            if (!ig.startsWith('@')) {
+                ig = '@' + ig;
+            }
+
+            // Susunan Pesan WhatsApp
+            const waText = `Halo Bro Arif,\n\nPerkenalkan saya *${name}*.\n(IG: ${ig})\n\n*[Pesan/Keperluan]*\n${message}`;
             
-            // Tombol Kirim Doa
-            document.getElementById('btn-doa').addEventListener('click', () => {
-                Swal.fire({
-                    title: 'Aamiin Ya Rabbal Alamin!',
-                    text: 'Terima kasih doanya. Semoga rezeki kamu juga semakin lancar dan berkah ya di hari yang fitri ini! ✨',
-                    iconHtml: '🤲',
-                    customClass: {
-                        icon: 'border-none text-4xl'
-                    },
-                    confirmButtonText: 'Sama-sama!',
-                    confirmButtonColor: '#166534',
-                    background: '#f0fdf4',
-                    backdrop: `rgba(22, 101, 52, 0.4)`
-                });
-                
-                // Sedikit animasi tombol
-                gsap.to('#btn-doa', {scale: 0.9, duration: 0.1, yoyo: true, repeat: 1});
-            });
+            // Nomor WA Tujuan (085817048266 diubah ke 6285817048266)
+            const waNumber = "6285817048266";
+            
+            // Encode teks
+            const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
 
-            // Tombol Skip Dulu
-            document.getElementById('btn-skip').addEventListener('click', () => {
-                Swal.fire({
-                    title: 'Wah, Nggak Apa-apa!',
-                    text: 'Namanya juga usaha hehehe. Yang penting silaturahmi tetap terjaga. Selamat berkumpul dengan keluarga! 🏠❤️',
-                    iconHtml: '😊',
-                    customClass: {
-                        icon: 'border-none text-4xl'
-                    },
-                    confirmButtonText: 'Siap!',
-                    confirmButtonColor: '#f59e0b',
-                    background: '#fffbeb',
-                });
-                
-                // Sedikit animasi tombol
-                gsap.to('#btn-skip', {scale: 0.9, duration: 0.1, yoyo: true, repeat: 1});
+            // SweetAlert2 Confirmation
+            Swal.fire({
+                title: 'Beralih ke WhatsApp?',
+                html: 'Pesanmu akan disiapkan secara otomatis di aplikasi WhatsApp.',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#25D366', // WA Green
+                cancelButtonColor: '#64748b',
+                confirmButtonText: '<i class="fa-brands fa-whatsapp text-lg mr-1"></i> Buka Chat',
+                cancelButtonText: 'Batal',
+                background: htmlElement.classList.contains('dark') ? '#1e293b' : '#ffffff',
+                color: htmlElement.classList.contains('dark') ? '#f8fafc' : '#0f172a',
+                customClass: {
+                    title: 'font-extrabold',
+                    popup: 'rounded-3xl',
+                    confirmButton: 'rounded-xl font-bold px-6 py-3',
+                    cancelButton: 'rounded-xl font-bold px-6 py-3'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(waUrl, '_blank');
+                    // Reset form opsional
+                    document.getElementById('waForm').reset();
+                }
             });
         });
     </script>
