@@ -68,10 +68,12 @@
         .btn-trakteer {
             background: #be1e2d;
             box-shadow: 0 4px 15px rgba(190, 30, 45, 0.3);
+            border: 2px solid transparent;
         }
         .btn-trakteer:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(190, 30, 45, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(190, 30, 45, 0.5);
+            border: 2px solid #ff4757;
         }
     </style>
 </head>
@@ -89,7 +91,7 @@
                 <div class="w-28 h-28 mx-auto rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 p-1 shadow-xl">
                     <img src="https://ui-avatars.com/api/?name=Bro+Arif&background=1e293b&color=fff&size=128" alt="Profile" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800">
                 </div>
-                <div class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 border-4 border-white dark:border-slate-800 rounded-full flex items-center justify-center">
+                <div class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 border-4 border-white dark:border-slate-800 rounded-full flex items-center justify-center shadow-lg">
                     <i class="fa-solid fa-check text-white text-xs"></i>
                 </div>
             </div>
@@ -98,7 +100,7 @@
         </div>
 
         <div class="gsap-item mb-10 w-full" data-aos="fade-up" data-aos-delay="100">
-            <a href="https://trakteer.id/itsmebroarif" target="_blank" class="btn-trakteer w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl text-white font-bold transition-all duration-300">
+            <a href="https://trakteer.id/itsmebroarif/tip?open=true" target="_blank" class="btn-trakteer w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl text-white font-bold transition-all duration-300">
                 <img src="https://trakteer.id/images/mix/logo-trakteer-icon.png" alt="Trakteer" class="w-6 h-6">
                 Dukung Saya di Trakteer
             </a>
@@ -155,11 +157,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // 1. Dark Mode Toggler Logic
+        // Theme Toggle
         const themeToggleBtn = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
         
-        // Cek preferensi sebelumnya (jika ada)
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             htmlElement.classList.add('dark');
         }
@@ -173,14 +174,14 @@
             }
         });
 
-        // 2. Initialize AOS
+        // AOS Init
         AOS.init({
             duration: 800,
             once: true,
             offset: 50
         });
 
-        // 3. Initial Animation with GSAP
+        // GSAP Init
         window.addEventListener('load', () => {
             gsap.from(".gsap-item", {
                 y: 50,
@@ -191,7 +192,7 @@
             });
         });
 
-        // 4. WhatsApp Form Logic & SweetAlert2
+        // WhatsApp Form Logic
         document.getElementById('waForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -199,27 +200,20 @@
             let ig = document.getElementById('waIg').value.trim();
             const message = document.getElementById('waMessage').value.trim();
 
-            // Format IG handle agar seragam (menambahkan @ jika user lupa)
             if (!ig.startsWith('@')) {
                 ig = '@' + ig;
             }
 
-            // Susunan Pesan WhatsApp
             const waText = `Halo Bro Arif,\n\nPerkenalkan saya *${name}*.\n(IG: ${ig})\n\n*[Pesan/Keperluan]*\n${message}`;
-            
-            // Nomor WA Tujuan (085817048266 diubah ke 6285817048266)
             const waNumber = "6285817048266";
-            
-            // Encode teks
             const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
 
-            // SweetAlert2 Confirmation
             Swal.fire({
                 title: 'Beralih ke WhatsApp?',
                 html: 'Pesanmu akan disiapkan secara otomatis di aplikasi WhatsApp.',
                 icon: 'success',
                 showCancelButton: true,
-                confirmButtonColor: '#25D366', // WA Green
+                confirmButtonColor: '#25D366',
                 cancelButtonColor: '#64748b',
                 confirmButtonText: '<i class="fa-brands fa-whatsapp text-lg mr-1"></i> Buka Chat',
                 cancelButtonText: 'Batal',
@@ -234,7 +228,6 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.open(waUrl, '_blank');
-                    // Reset form opsional
                     document.getElementById('waForm').reset();
                 }
             });
