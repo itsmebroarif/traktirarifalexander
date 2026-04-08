@@ -1,237 +1,145 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact & Support | Bro Arif</title>
 
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+            min-height: 100vh;
         }
 
-        /* Custom Background Gradients */
-        .bg-light-theme {
-            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
-            background-attachment: fixed;
-        }
-
-        html.dark .bg-dark-theme {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            background-attachment: fixed;
-        }
-
-        /* Glassmorphism Card */
         .glass-card {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255,255,255,0.6);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px;
         }
 
-        html.dark .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid white;
         }
 
-        /* Input focus styles */
-        .input-glass {
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-        html.dark .input-glass {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #f8fafc;
-        }
-        
-        .input-glass:focus {
-            outline: none;
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-
-        /* Trakteer Button Animation */
         .btn-trakteer {
             background: #be1e2d;
-            box-shadow: 0 4px 15px rgba(190, 30, 45, 0.3);
-            border: 2px solid transparent;
+            color: white;
+            font-weight: bold;
         }
+
         .btn-trakteer:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(190, 30, 45, 0.5);
-            border: 2px solid #ff4757;
+            background: #ff4757;
+        }
+
+        .input-glass {
+            background: rgba(255,255,255,0.8);
         }
     </style>
 </head>
-<body class="bg-light-theme dark:bg-dark-theme text-slate-800 dark:text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-indigo-500 selection:text-white">
 
-    <button id="themeToggle" class="fixed top-4 right-4 z-50 w-12 h-12 rounded-full glass-card flex items-center justify-center text-xl shadow-lg hover:scale-110 transition-transform text-indigo-600 dark:text-yellow-400">
-        <i class="fa-solid fa-moon dark:hidden"></i>
-        <i class="fa-solid fa-sun hidden dark:block"></i>
-    </button>
+<body>
 
-    <main class="max-w-md mx-auto min-h-screen p-6 flex flex-col pt-12 pb-12">
-        
-        <div class="gsap-item text-center mb-8">
-            <div class="relative inline-block mb-4">
-                <div class="w-28 h-28 mx-auto rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 p-1 shadow-xl">
-                    <img src="https://ui-avatars.com/api/?name=Bro+Arif&background=1e293b&color=fff&size=128" alt="Profile" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800">
-                </div>
-                <div class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 border-4 border-white dark:border-slate-800 rounded-full flex items-center justify-center shadow-lg">
-                    <i class="fa-solid fa-check text-white text-xs"></i>
-                </div>
-            </div>
-            <h1 class="text-2xl font-extrabold tracking-tight mb-1">Bro Arif</h1>
-            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">Digital Creator & Developer</p>
-        </div>
+<div class="container py-5" style="max-width: 500px;">
 
-        <div class="gsap-item mb-10 w-full" data-aos="fade-up" data-aos-delay="100">
-            <a href="https://trakteer.id/itsmebroarif/tip?open=true" target="_blank" class="btn-trakteer w-full flex items-center justify-center gap-3 py-4 px-6 rounded-2xl text-white font-bold transition-all duration-300">
-                <img src="https://trakteer.id/images/mix/logo-trakteer-icon.png" alt="Trakteer" class="w-6 h-6">
-                Dukung Saya di Trakteer
-            </a>
-        </div>
+    <!-- Profile -->
+    <div class="text-center mb-4">
+        <img src="https://ui-avatars.com/api/?name=Bro+Arif" class="profile-img mb-3">
+        <h4 class="fw-bold">Bro Arif</h4>
+        <small class="text-muted">Digital Creator & Developer</small>
+    </div>
 
-        <div class="gsap-item glass-card rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/20 dark:bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
-            
-            <div class="mb-6 text-center">
-                <h2 class="text-xl font-bold mb-2 flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-green-500 text-2xl"></i> Chat via WhatsApp
-                </h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Isi form di bawah untuk mengirim pesan langsung ke WhatsApp saya.</p>
+    <!-- Trakteer -->
+    <a href="https://trakteer.id/itsmebroarif/tip?open=true" target="_blank" class="btn btn-trakteer w-100 mb-4 py-3">
+        <img src="https://png.pngtree.com/png-clipart/20220705/ourmid/pngtree-indosian-money-png-image_5684456.png" width="20"> Dukung Saya di Trakteer
+    </a>
+
+    <!-- Form -->
+    <div class="glass-card shadow">
+
+        <h5 class="text-center mb-3">
+            <i class="fa-brands fa-whatsapp text-success"></i> Chat via WhatsApp
+        </h5>
+
+        <form id="waForm">
+
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" id="waName" class="form-control input-glass" required>
             </div>
 
-            <form id="waForm" class="space-y-4 relative z-10">
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Nama Lengkap</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-                            <i class="fa-regular fa-user"></i>
-                        </div>
-                        <input type="text" id="waName" required placeholder="Cth: Budi Santoso" class="input-glass w-full pl-11 pr-4 py-3 rounded-xl text-sm transition-all">
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label class="form-label">Instagram</label>
+                <input type="text" id="waIg" class="form-control input-glass" required>
+            </div>
 
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Username Instagram</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
-                            <i class="fa-brands fa-instagram"></i>
-                        </div>
-                        <input type="text" id="waIg" required placeholder="Cth: @budi_s" class="input-glass w-full pl-11 pr-4 py-3 rounded-xl text-sm transition-all">
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label class="form-label">Pesan</label>
+                <textarea id="waMessage" class="form-control input-glass" rows="4" required></textarea>
+            </div>
 
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider mb-1 pl-1 text-slate-600 dark:text-slate-300">Pesan / Keperluan</label>
-                    <textarea id="waMessage" required rows="4" placeholder="Tuliskan keperluanmu secara detail di sini..." class="input-glass w-full p-4 rounded-xl text-sm transition-all resize-none"></textarea>
-                </div>
+            <button type="submit" class="btn btn-primary w-100 py-2">
+                Kirim Pesan <i class="fa-solid fa-paper-plane"></i>
+            </button>
 
-                <button type="submit" class="w-full mt-2 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-[0_8px_20px_rgba(99,102,241,0.3)] hover:shadow-[0_10px_25px_rgba(99,102,241,0.5)] transition-all duration-300 flex justify-center items-center gap-2 transform active:scale-95">
-                    Kirim Pesan Sekarang <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
+        </form>
+    </div>
 
-        <footer class="mt-auto pt-10 text-center text-xs font-medium text-slate-400 dark:text-slate-500 pb-4">
-            <p>&copy; 2026 Bro Arif. All rights reserved.</p>
-        </footer>
-    </main>
+    <footer class="text-center mt-4 text-muted">
+        <small>&copy; 2026 Bro Arif</small>
+    </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</div>
 
-    <script>
-        // Theme Toggle
-        const themeToggleBtn = document.getElementById('themeToggle');
-        const htmlElement = document.documentElement;
-        
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            htmlElement.classList.add('dark');
+<script>
+document.getElementById('waForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('waName').value.trim();
+    let ig = document.getElementById('waIg').value.trim();
+    const message = document.getElementById('waMessage').value.trim();
+
+    if (!ig.startsWith('@')) ig = '@' + ig;
+
+    const text = `Halo Bro Arif,
+
+Perkenalkan saya *${name}*
+(IG: ${ig})
+
+Pesan:
+${message}`;
+
+    const url = `https://wa.me/6285817048266?text=${encodeURIComponent(text)}`;
+
+    Swal.fire({
+        title: 'Kirim ke WhatsApp?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Kirim',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.open(url, '_blank');
         }
+    });
+});
+</script>
 
-        themeToggleBtn.addEventListener('click', () => {
-            htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // AOS Init
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
-        });
-
-        // GSAP Init
-        window.addEventListener('load', () => {
-            gsap.from(".gsap-item", {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: "power3.out"
-            });
-        });
-
-        // WhatsApp Form Logic
-        document.getElementById('waForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('waName').value.trim();
-            let ig = document.getElementById('waIg').value.trim();
-            const message = document.getElementById('waMessage').value.trim();
-
-            if (!ig.startsWith('@')) {
-                ig = '@' + ig;
-            }
-
-            const waText = `Halo Bro Arif,\n\nPerkenalkan saya *${name}*.\n(IG: ${ig})\n\n*[Pesan/Keperluan]*\n${message}`;
-            const waNumber = "6285817048266";
-            const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
-
-            Swal.fire({
-                title: 'Beralih ke WhatsApp?',
-                html: 'Pesanmu akan disiapkan secara otomatis di aplikasi WhatsApp.',
-                icon: 'success',
-                showCancelButton: true,
-                confirmButtonColor: '#25D366',
-                cancelButtonColor: '#64748b',
-                confirmButtonText: '<i class="fa-brands fa-whatsapp text-lg mr-1"></i> Buka Chat',
-                cancelButtonText: 'Batal',
-                background: htmlElement.classList.contains('dark') ? '#1e293b' : '#ffffff',
-                color: htmlElement.classList.contains('dark') ? '#f8fafc' : '#0f172a',
-                customClass: {
-                    title: 'font-extrabold',
-                    popup: 'rounded-3xl',
-                    confirmButton: 'rounded-xl font-bold px-6 py-3',
-                    cancelButton: 'rounded-xl font-bold px-6 py-3'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.open(waUrl, '_blank');
-                    document.getElementById('waForm').reset();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
